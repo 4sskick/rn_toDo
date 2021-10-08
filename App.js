@@ -19,8 +19,8 @@ const App = () => {
 
   const FakeListItemData = ({dataListItem}) => {
     return (
-      <View style={mainStyles.container_listItem}>
-        <View>
+      <View style={mainStyles.content_container_listItem}>
+        <View style={{flex: 1}}>
           <Text
             style={{
               fontWeight: 'bold',
@@ -33,6 +33,19 @@ const App = () => {
             {dataListItem?.task}
           </Text>
         </View>
+
+        <TouchableOpacity
+          style={[mainStyles.content_container_listItem_action]}>
+          <Icon name="done" size={20} color={mainColors.white} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[
+            mainStyles.content_container_listItem_action,
+            {backgroundColor: 'red'},
+          ]}>
+          <Icon name="delete" size={20} color={mainColors.white} />
+        </TouchableOpacity>
       </View>
     );
   };
@@ -127,13 +140,23 @@ const mainStyles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  container_listItem: {
+  content_container_listItem: {
     padding: 20,
     backgroundColor: mainColors.white,
     flexDirection: 'row',
     elevation: 12,
     borderRadius: 7,
     marginVertical: 10,
+  },
+
+  content_container_listItem_action: {
+    height: 25,
+    width: 25,
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 5,
+    borderRadius: 3,
   },
 });
 
