@@ -17,8 +17,24 @@ const App = () => {
     {id: 3, task: 'Third Task', complete: false},
   ]);
 
-  const FakeListItemData = () => {
-    return <View style={mainStyles.container_listItem}></View>;
+  const FakeListItemData = ({dataListItem}) => {
+    return (
+      <View style={mainStyles.container_listItem}>
+        <View>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontSize: 15,
+              color: mainColors.primary,
+              textDecorationLine: dataListItem?.complete
+                ? 'line-through'
+                : 'none',
+            }}>
+            {dataListItem?.task}
+          </Text>
+        </View>
+      </View>
+    );
   };
 
   return (
@@ -40,7 +56,7 @@ const App = () => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{padding: 20, paddingBottom: 100}}
           data={fakeDataTodos}
-          renderItem={({item}) => <FakeListItemData fakeTodo={item} />}
+          renderItem={({item}) => <FakeListItemData dataListItem={item} />}
         />
       </View>
 
