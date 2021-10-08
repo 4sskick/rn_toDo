@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 const App = () => {
+  const [inputTodo, setInputTodo] = React.useState('');
   const [fakeDataTodos, setFakeDataTodos] = React.useState([
     {id: 1, task: 'First Task', complete: true},
     {id: 2, task: 'Second Task', complete: true},
@@ -52,6 +53,18 @@ const App = () => {
     );
   };
 
+  const addTodo = () => {
+    console.log(inputTodo);
+
+    const createTodo = {
+      id: Math.random(),
+      task: inputTodo,
+      complete: false,
+    };
+
+    setInputTodo([]);
+  };
+
   return (
     <SafeAreaView style={mainStyles.mainContainer}>
       <View style={mainStyles.header}>
@@ -77,10 +90,13 @@ const App = () => {
 
       <View style={mainStyles.footer}>
         <View style={mainStyles.footer_container}>
-          <TextInput placeholder="Add Todo here ..."></TextInput>
+          <TextInput
+            placeholder="Add Todo here ..."
+            value={inputTodo}
+            onChangeText={textTodo => setInputTodo(textTodo)}></TextInput>
         </View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={addTodo}>
           <View style={mainStyles.icon_container}>
             <Icon name="add" color={mainColors.white} size={30} />
           </View>
