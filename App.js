@@ -7,9 +7,20 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
 
 const App = () => {
+  const [fakeDataTodos, setFakeDataTodos] = React.useState([
+    {id: 1, task: 'First Task', complete: true},
+    {id: 2, task: 'Second Task', complete: true},
+    {id: 3, task: 'Third Task', complete: false},
+  ]);
+
+  const FakeListItemData = () => {
+    return <View style={mainStyles.container_listItem}></View>;
+  };
+
   return (
     <SafeAreaView style={mainStyles.mainContainer}>
       <View style={mainStyles.header}>
@@ -23,6 +34,16 @@ const App = () => {
         </Text>
         <Icon name="delete" color="red" size={25} />
       </View>
+
+      <View>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{padding: 20, paddingBottom: 100}}
+          data={fakeDataTodos}
+          renderItem={({item}) => <FakeListItemData fakeTodo={item} />}
+        />
+      </View>
+
       <View style={mainStyles.footer}>
         <View style={mainStyles.footer_container}>
           <TextInput placeholder="Add Todo here ..."></TextInput>
@@ -88,6 +109,15 @@ const mainStyles = StyleSheet.create({
     elevation: 40,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+
+  container_listItem: {
+    padding: 20,
+    backgroundColor: mainColors.white,
+    flexDirection: 'row',
+    elevation: 12,
+    borderRadius: 7,
+    marginVertical: 10,
   },
 });
 
