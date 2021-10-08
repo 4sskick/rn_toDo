@@ -34,10 +34,12 @@ const App = () => {
           </Text>
         </View>
 
-        <TouchableOpacity
-          style={[mainStyles.content_container_listItem_action]}>
-          <Icon name="done" size={20} color={mainColors.white} />
-        </TouchableOpacity>
+        {!dataListItem?.complete && (
+          <TouchableOpacity
+            style={[mainStyles.content_container_listItem_action]}>
+            <Icon name="done" size={20} color={mainColors.white} />
+          </TouchableOpacity>
+        )}
 
         <TouchableOpacity
           style={[
