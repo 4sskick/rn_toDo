@@ -1,6 +1,13 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {SafeAreaView, StyleSheet, View, Text, TextInput} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 
 const App = () => {
   return (
@@ -20,6 +27,12 @@ const App = () => {
         <View style={mainStyles.footer_container}>
           <TextInput placeholder="Add Todo here ..."></TextInput>
         </View>
+
+        <TouchableOpacity>
+          <View style={mainStyles.icon_container}>
+            <Icon name="add" color={mainColors.white} size={30} />
+          </View>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -65,6 +78,16 @@ const mainStyles = StyleSheet.create({
     marginRight: 20,
     borderRadius: 30,
     paddingHorizontal: 20,
+  },
+
+  icon_container: {
+    height: 50,
+    width: 50,
+    backgroundColor: mainColors.primary,
+    borderRadius: 25,
+    elevation: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
