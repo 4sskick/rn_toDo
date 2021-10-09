@@ -10,6 +10,7 @@ import {
   FlatList,
   Alert,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App = () => {
   const [inputTodo, setInputTodo] = React.useState('');
@@ -116,6 +117,31 @@ const App = () => {
     );
   };
 
+  function IsEmptyView() {
+    if (fakeDataTodos.length == 0) {
+      return (
+        <Text
+          style={{
+            textAlign: 'center',
+            fontSize: 20,
+            fontWeight: 'bold',
+            color: mainColors.primary,
+          }}>
+          Data is empty
+        </Text>
+      );
+    } else {
+      return (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{padding: 20, paddingBottom: 100}}
+          data={fakeDataTodos}
+          renderItem={({item}) => <FakeListItemData dataListItem={item} />}
+        />
+      );
+    }
+  }
+
   return (
     <SafeAreaView style={mainStyles.mainContainer}>
       <View style={mainStyles.header}>
@@ -130,13 +156,18 @@ const App = () => {
         <Icon name="delete" color="red" size={25} onPress={deleteAllTodo} />
       </View>
 
-      <View>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{padding: 20, paddingBottom: 100}}
-          data={fakeDataTodos}
-          renderItem={({item}) => <FakeListItemData dataListItem={item} />}
-        />
+      <View
+        style={{
+          alignSelf: 'stretch',
+          borderBottomWidth: 0.5,
+          borderBottomColor: mainColors.primary,
+          marginTop: 0,
+          marginBottom: 0,
+        }}
+      />
+
+      <View style={{justifyContent: 'center', flex: 1}}>
+        <IsEmptyView />
       </View>
 
       <View style={mainStyles.footer}>
