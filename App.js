@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   FlatList,
+  Alert,
 } from 'react-native';
 
 const App = () => {
@@ -56,13 +57,21 @@ const App = () => {
   const addTodo = () => {
     console.log(inputTodo);
 
-    const createTodo = {
-      id: Math.random(),
-      task: inputTodo,
-      complete: false,
-    };
+    if (inputTodo) {
+      const createTodo = {
+        id: Math.random(),
+        task: inputTodo,
+        complete: Math.random() < 0.5, //radnom boolean with proportion 50% -> 0.5
+      };
 
-    setInputTodo([]);
+      //set existing values of fake data then append with latest value
+      setFakeDataTodos([...fakeDataTodos, createTodo]);
+      setInputTodo('');
+    } else {
+      Alert.alert('Warning', 'input cannot blank', [{text: 'Ok'}], {
+        cancelable: false,
+      });
+    }
   };
 
   return (
