@@ -39,7 +39,7 @@ const App = () => {
         {!dataListItem?.complete && (
           <TouchableOpacity
             style={[mainStyles.content_container_listItem_action]}
-            onPress={() => makeTodoComplete(dataListItem?.id)}>
+            onPress={() => updateToComplete(dataListItem?.id)}>
             <Icon name="done" size={20} color={mainColors.white} />
           </TouchableOpacity>
         )}
@@ -48,7 +48,8 @@ const App = () => {
           style={[
             mainStyles.content_container_listItem_action,
             {backgroundColor: 'red'},
-          ]}>
+          ]}
+          onPress={() => deleteTodo(dataListItem?.id)}>
           <Icon name="delete" size={20} color={mainColors.white} />
         </TouchableOpacity>
       </View>
@@ -77,7 +78,7 @@ const App = () => {
   };
 
   //set todo complete
-  const makeTodoComplete = todoId => {
+  const updateToComplete = todoId => {
     console.log(todoId);
 
     //loop through map
@@ -94,6 +95,27 @@ const App = () => {
     setFakeDataTodos(updateTodo);
   };
 
+  //delete operation todo
+  const deleteTodo = todoId => {
+    console.log(todoId);
+
+    const latestDataAfterDelete = fakeDataTodos.filter(
+      item => item.id != todoId,
+    );
+
+    setFakeDataTodos(latestDataAfterDelete);
+  };
+
+  //delete all operation
+  const deleteAllTodo = () => {
+    Alert.alert(
+      'Warning',
+      'All data gonna be delete. Are you sure to do this?',
+      [{text: 'Ok', onPress: () => setFakeDataTodos([])}, {text: 'Nope'}],
+      {cancelable: false},
+    );
+  };
+
   return (
     <SafeAreaView style={mainStyles.mainContainer}>
       <View style={mainStyles.header}>
@@ -105,7 +127,7 @@ const App = () => {
           }}>
           TODO APP
         </Text>
-        <Icon name="delete" color="red" size={25} />
+        <Icon name="delete" color="red" size={25} onPress={deleteAllTodo} />
       </View>
 
       <View>
