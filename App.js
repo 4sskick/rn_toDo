@@ -38,7 +38,8 @@ const App = () => {
 
         {!dataListItem?.complete && (
           <TouchableOpacity
-            style={[mainStyles.content_container_listItem_action]}>
+            style={[mainStyles.content_container_listItem_action]}
+            onPress={() => makeTodoComplete(dataListItem?.id)}>
             <Icon name="done" size={20} color={mainColors.white} />
           </TouchableOpacity>
         )}
@@ -54,6 +55,7 @@ const App = () => {
     );
   };
 
+  //set todo
   const addTodo = () => {
     console.log(inputTodo);
 
@@ -72,6 +74,24 @@ const App = () => {
         cancelable: false,
       });
     }
+  };
+
+  //set todo complete
+  const makeTodoComplete = todoId => {
+    console.log(todoId);
+
+    //loop through map
+    const updateTodo = fakeDataTodos.map(item => {
+      if (item.id == todoId) {
+        //returning of object which same on id
+        //then set the properties directly
+        return {...item, complete: true};
+      }
+      return item;
+    });
+
+    //replcaing exising with lates state of data
+    setFakeDataTodos(updateTodo);
   };
 
   return (
