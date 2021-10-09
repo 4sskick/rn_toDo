@@ -18,6 +18,7 @@ make sure you already installed node js
 # Screenshot
 
 ![alt](./ss/Screenshot_1633803714.png)
+<img src="./ss/Screenshot_1633803714.png" alt="drawing" width="200"/>
 
 ![alt](./ss/Screenshot_1633803702.png)
 
