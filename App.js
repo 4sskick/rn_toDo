@@ -109,12 +109,13 @@ const App = () => {
 
   //delete all operation
   const deleteAllTodo = () => {
-    Alert.alert(
-      'Warning',
-      'All data gonna be delete. Are you sure to do this?',
-      [{text: 'Ok', onPress: () => setFakeDataTodos([])}, {text: 'Nope'}],
-      {cancelable: false},
-    );
+    if (fakeDataTodos.length > 0)
+      Alert.alert(
+        'Warning',
+        'All data gonna be delete. Are you sure to do this?',
+        [{text: 'Ok', onPress: () => setFakeDataTodos([])}, {text: 'Nope'}],
+        {cancelable: false},
+      );
   };
 
   function IsEmptyView() {
